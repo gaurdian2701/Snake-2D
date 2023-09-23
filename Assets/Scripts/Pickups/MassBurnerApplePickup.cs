@@ -1,16 +1,15 @@
-using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ApplePickup : Pickup
+public class MassBurnerApplePickup : Pickup
 {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.GetComponent<PlayerController>())
         {
-            collision.GetComponent<PlayerController>().IncreaseSize();
+            collision.GetComponent<PlayerController>().DecreaseSize();
             RandomizePosition();
         }
     }

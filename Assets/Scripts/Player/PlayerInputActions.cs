@@ -50,7 +50,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""b7f11cee-7bf7-4315-85f0-fbb78a2d691d"",
-                    ""path"": ""1DAxis"",
+                    ""path"": ""1DAxis(whichSideWins=1)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
@@ -83,7 +83,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                 {
                     ""name"": ""1D Axis"",
                     ""id"": ""b766d06e-3d2b-4a8b-8474-9a21582b5763"",
-                    ""path"": ""1DAxis"",
+                    ""path"": ""1DAxis(whichSideWins=1)"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",

@@ -3,14 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ApplePickup : Pickup
+public class SpeedBoostPotion : Pickup
 {
-
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.GetComponent<PlayerController>())
+        if(collision.GetComponent<PlayerController>())
         {
-            collision.GetComponent<PlayerController>().IncreaseSize();
+            collision.GetComponent<Powerups>().StartSpeedBoost();
             RandomizePosition();
         }
     }
