@@ -15,26 +15,28 @@ public class PlayerController : MonoBehaviour
     private Vector2 moveDirection;
     private Rigidbody2D rb;
     private Vector3 playerPos;
-    private ParticleSystem particle;
+    private ParticleController particleController;
 
-  
+
+    public static Action sizeGrown;
+    public static Action sizeDecreased;
+    public static Action InitiateGameOverCondition;
+
+    public bool isInvincible;
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody2D>();
-        particle = GetComponent<ParticleSystem>();
-        moveDirection.x = 1f;
-        moveDirection.y = 0f;
+        particleController = GetComponent<ParticleController>(); 
+        
+        moveDirection.x = 0f;
+        moveDirection.y = 1f;
+        isInvincible = false;
     }
 
     private void Start()
     {
         bodyList.Add(this.transform);
-    }
-
-    private void OnDisable()
-    {
-  
     }
 
     private void FixedUpdate()
@@ -55,8 +57,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.gameObject.name.StartsWith("Snake") && Vector3.Distance(transform.position, collision.transform.position) < 0.1f)
-            Debug.Log("GAME OVER");
+        if (CheckForGameOver(collision))
+            GameOver();
     }
 
     public float GetMoveSpeed()
@@ -68,6 +70,8 @@ public class PlayerController : MonoBehaviour
     {
         moveSpeed = newSpeed;
     }
+
+    public void ToggleInvincibility() => isInvincible = !isInvincible;
 
     public void MoveSideWays(InputAction.CallbackContext context)
     {
@@ -89,17 +93,33 @@ public class PlayerController : MonoBehaviour
 
     public void IncreaseSize()
     {
-        EnableParticles(Color.red);
+        sizeGrown.Invoke();
+
+        particleController.EnableParticles(Color.red);
+
         Transform body = Instantiate(this.snakeBody);
         body.position = bodyList[bodyList.Count - 1].position;
+
         bodyList.Add(body);
     }
 
     public void DecreaseSize()
     {
-        EnableParticles(Color.green);
+        if (OnlySnakeHeadPresent())
+        {
+            GameOver();
+            return;
+        }
+
+        else if (isInvincible)
+            return;
+
+        particleController.EnableParticles(Color.green);  
+        sizeDecreased.Invoke();
+
         GameObject body = bodyList.ElementAt(bodyList.Count - 1).gameObject;
         bodyList.RemoveAt(bodyList.Count - 1);
+
         Destroy(body);
     }
 
@@ -116,6 +136,35 @@ public class PlayerController : MonoBehaviour
             PerformXWrapping(xVal, yVal);
     }
 
+    private bool CheckForGameOver(Collider2D collision)
+    {
+        if (collision.gameObject.name.Contains("Snake") && IsTooClose(collision) && !isInvincible || collision.gameObject.GetComponent<PlayerController>())
+            return true;
+
+        return false;
+    }
+    private bool IsTooClose(Collider2D collision)
+    {
+        if (Vector3.Distance(transform.position, collision.transform.position) < 0.1f)
+            return true;
+
+        return false;
+    }
+
+    private bool OnlySnakeHeadPresent()
+    {
+        if (bodyList.Count == 1)
+            return true;
+
+        return false;
+    }
+
+    private void GameOver()
+    {
+        InitiateGameOverCondition.Invoke();
+        moveSpeed = 0f;
+    }
+
     private void PerformXWrapping(float xVal, float yVal)
     {
         playerPos = new Vector3(-xVal, yVal, 0f);
@@ -126,11 +175,5 @@ public class PlayerController : MonoBehaviour
     {
         playerPos = new Vector3(xVal, -yVal, 0f);
         transform.position = playerPos;
-    }
-
-    public void EnableParticles(Color color)
-    {
-        GetComponent<ParticleSystemRenderer>().material.color = color;
-        particle.Play();
     }
 }

@@ -28,7 +28,7 @@ Transform:
   m_GameObject: {fileID: 3661821571754319417}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.4677, y: 0.476, z: 1}
+  m_LocalScale: {x: 0.4677, y: 0.476, z: 0}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -143,9 +143,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 666d556a397b6b74a83883a00a2c38ab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playArea: {fileID: 0}
-  sprite: {fileID: 0}
-  powerUpCollider: {fileID: 0}
-  componentsEnabled: 0
   enabledCooldownTime: 7
   disabledCooldownTime: 0

@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: -4967270093299504142}
   - component: {fileID: 1915432501385619383}
   - component: {fileID: 4999217787171819829}
+  - component: {fileID: 5862165293374035975}
   - component: {fileID: 1588746126100245493}
   - component: {fileID: 7740663552412130891}
   - component: {fileID: 5862152234988376590}
@@ -123,7 +124,7 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 5089037a-e289-4820-bbfb-5fd1007207f5
     m_ActionName: Player/MoveSide[/Keyboard/a,/Keyboard/d]
-  m_NeverAutoSwitchControlSchemes: 0
+  m_NeverAutoSwitchControlSchemes: 1
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
   m_SplitScreenIndex: -1
@@ -143,6 +144,7 @@ MonoBehaviour:
   moveSpeed: 3.5
   snakeBody: {fileID: 2483785282257025626, guid: b3eb3378cc324f047af01131aa72762e, type: 3}
   bodyList: []
+  isInvincible: 0
 --- !u!114 &4999217787171819829
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -153,6 +155,19 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 86362635659dc36489a99524ae2a7067, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  powerUpTime: 7
+--- !u!114 &5862165293374035975
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3662768909667325264}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 56a47cfe95df29f42bf7f500806f93f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &1588746126100245493
@@ -239,7 +254,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.000000029802322, y: -0.07988797}
+  m_Offset: {x: -0.007977545, y: -0.03728053}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -250,7 +265,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.37921065, y: 0.27402}
+  m_Size: {x: 0.6185379, y: 0.7682671}
   m_EdgeRadius: 0
 --- !u!198 &5862152234988376590
 ParticleSystem:
