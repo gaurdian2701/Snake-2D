@@ -18,15 +18,39 @@ public class LevelLoader : MonoBehaviour
 
         else
             Destroy(gameObject);
+
+        Time.timeScale = 1f;
     }
 
     public void LoadScene(string sceneName)
     {
         SceneManager.LoadScene(sceneName);
+        Time.timeScale = 1f;
     }
 
     public void ReloadScene()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        Time.timeScale = 1f;  
+    }
+
+    public void PauseScene()
+    {
+        if (Time.timeScale == 0f)
+            return;
+
+        else
+            Time.timeScale = 0f;
+    }
+
+    public void ResumeScene()
+    {
+        Time.timeScale = 1f;
+        PlayerController.GamePaused.Invoke();
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
     }
 }

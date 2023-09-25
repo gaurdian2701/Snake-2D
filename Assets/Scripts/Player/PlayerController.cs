@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour
     public static Action sizeGrown;
     public static Action sizeDecreased;
     public static Action InitiateGameOverCondition;
+    public static Action GamePaused;
 
     public bool isInvincible;
 
@@ -88,6 +89,17 @@ public class PlayerController : MonoBehaviour
         {
             moveDirection.y = context.ReadValue<float>();
             moveDirection.x = 0f;
+        }
+    }
+
+    public void PauseGame(InputAction.CallbackContext context)
+    {
+        if (context.performed)
+        {
+            GamePaused.Invoke();
+
+            if (LevelLoader.Instance)
+                LevelLoader.Instance.PauseScene();
         }
     }
 
@@ -162,6 +174,7 @@ public class PlayerController : MonoBehaviour
     private void GameOver()
     {
         InitiateGameOverCondition.Invoke();
+        GetComponent<PlayerInput>().enabled = false;
         moveSpeed = 0f;
     }
 
