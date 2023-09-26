@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.CompilerServices;
@@ -23,14 +24,21 @@ public class Powerups : MonoBehaviour
         playerSprite = GetComponent<SpriteRenderer>();
         particleController = GetComponent<ParticleController>();
 
-        scoreManager = GameObject.Find("GameCanvas").GetComponent<ScoreManager>();
+        ScoreManager.SendScores += InitializeOriginalScoringValue;
     }
 
     private void Start()
     {
-        originalScoringValue = scoreManager.GetDefaultScoringValue();
         originalSpeed = playerController.GetMoveSpeed();
         originalColor = playerSprite.material.color;
+        originalScoringValue = scoreManager.GetDefaultScoringValue();
+    }
+
+    private void InitializeOriginalScoringValue(ScoreManager scorer)
+    {
+        scoreManager = scorer;
+        originalScoringValue = scoreManager.GetDefaultScoringValue();
+        ScoreManager.SendScores -= InitializeOriginalScoringValue;
     }
 
     #region SpeedBoost

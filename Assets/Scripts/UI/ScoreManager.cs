@@ -6,12 +6,16 @@ using UnityEngine;
 
 public class ScoreManager : MonoBehaviour
 {
+    public static Action<ScoreManager> SendScores;
+
     private TextMeshProUGUI scoreText;
     private float currentScore;
     private float scoreIncrease;
 
     private void Awake()
     {
+        SendScores.Invoke(this);
+
         scoreText = transform.GetChild(0).GetComponent<TextMeshProUGUI>();
         PlayerController.sizeGrown += IncreaseScore;
         PlayerController.sizeDecreased += DecreaseScore;

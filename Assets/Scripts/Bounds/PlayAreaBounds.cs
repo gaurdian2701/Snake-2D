@@ -4,10 +4,20 @@ using UnityEngine;
 
 public class PlayAreaBounds : MonoBehaviour
 {
-    private BoxCollider2D playBounds;
-    private void Start()
+    private static PlayAreaBounds instance;
+    public static PlayAreaBounds Instance { get { return instance; } }
+
+
+    private void Awake()
     {
-        playBounds = GetComponent<BoxCollider2D>();
+        if(instance == null)
+            instance = this;
+    }
+
+    private void OnDestroy()
+    {
+        if(instance == this)
+            instance = null;
     }
 
     private void OnTriggerExit2D(Collider2D collision)

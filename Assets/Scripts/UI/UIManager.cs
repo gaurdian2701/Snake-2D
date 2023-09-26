@@ -5,14 +5,12 @@ using UnityEngine;
 
 public class UIManager : MonoBehaviour
 {
-    private GameObject gameOverScreen;
-    private GameObject pauseScreen;
+    [SerializeField] private GameObject gameOverScreen;
+    [SerializeField] private GameObject pauseScreen;
 
     private bool gamePaused = false;
     private void Awake()
     {
-        gameOverScreen = transform.Find("GameOverScreen").gameObject;
-        pauseScreen = transform.Find("PauseScreen").gameObject;
         PlayerController.InitiateGameOverCondition += InitiateGameOverScreen;
         PlayerController.GamePaused += TogglePauseScreen;
     }

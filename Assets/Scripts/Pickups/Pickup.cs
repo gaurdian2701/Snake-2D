@@ -18,10 +18,10 @@ public class Pickup : MonoBehaviour
         sprite = GetComponent<SpriteRenderer>();
         powerUpCollider = GetComponent<BoxCollider2D>();
         componentsEnabled = true;
-        playArea = GameObject.Find("PlayArea").GetComponent<BoxCollider2D>();
     }
     private void Start()
     {
+        playArea = PlayAreaBounds.Instance.GetComponent<BoxCollider2D>();
         RandomizePosition();
     }
 
