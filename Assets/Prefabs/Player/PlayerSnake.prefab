@@ -174,6 +174,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   powerUpTime: 7
+  scoreManager: {fileID: 7472874818164775941, guid: 71f3c520d6440e142bf83054c86b1102, type: 3}
 --- !u!114 &5862165293374035975
 MonoBehaviour:
   m_ObjectHideFlags: 0
